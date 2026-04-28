@@ -1,0 +1,10 @@
+function App() {
+  return (
+    <div>
+      <h1>FinTrack AI</h1>
+      <p>My finance dashboard</p>
+    </div>
+  );
+}
+
+export default App;
