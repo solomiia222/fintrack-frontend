@@ -198,4 +198,19 @@ th {
     flex-wrap: wrap;
     justify-content: center;
   }
+
+  .logout-button {
+  background-color: transparent;
+  color: #d1d5db;
+  border: 1px solid #4b5563;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.logout-button:hover {
+  color: white;
+  border-color: #6366f1;
+}
 }

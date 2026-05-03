@@ -1,6 +1,14 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    navigate("/login");
+    window.location.reload();
+  };
+
   return (
     <header className="header">
       <div className="logo">FinTrack AI</div>
@@ -10,6 +18,10 @@ function Header() {
         <NavLink to="/transactions">Transactions</NavLink>
         <NavLink to="/budgets">Budgets</NavLink>
         <NavLink to="/insights">AI Insights</NavLink>
+
+        <button className="logout-button" onClick={handleLogout}>
+          Logout
+        </button>
       </nav>
     </header>
   );

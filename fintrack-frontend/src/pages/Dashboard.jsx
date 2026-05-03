@@ -8,6 +8,22 @@ function Dashboard() {
   const totalBudget = budgets.reduce((sum, item) => sum + item.limit, 0);
   const remainingBudget = totalBudget - totalSpending;
 
+  // 🔥 TOP CATEGORY
+  const categoryMap = {};
+  transactions.forEach((t) => {
+    if (!categoryMap[t.category]) {
+      categoryMap[t.category] = 0;
+    }
+    categoryMap[t.category] += t.amount;
+  });
+
+  const topCategory = Object.keys(categoryMap).reduce((a, b) =>
+    categoryMap[a] > categoryMap[b] ? a : b
+  );
+
+  // 🔥 FAKE AI PREDICTION
+  const predictedSpending = totalSpending * 1.2;
+
   return (
     <div>
       <h1>Dashboard</h1>
@@ -30,13 +46,13 @@ function Dashboard() {
 
         <SummaryCard
           title="Predicted Spending"
-          value="€1,620"
+          value={`€${predictedSpending.toFixed(2)}`}
           description="AI forecast for month end"
         />
 
         <SummaryCard
           title="Top Category"
-          value="Housing"
+          value={topCategory}
           description="Highest spending category"
         />
       </div>
