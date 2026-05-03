@@ -2,73 +2,113 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [name, setName] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (!name.trim()) return;
+  const [formData, setFormData] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    phone: "",
+    bankName: "",
+    password: "",
+  });
 
-    localStorage.setItem("user", name);
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleRegister = () => {
+    if (
+      !formData.name ||
+      !formData.surname ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.bankName ||
+      !formData.password
+    ) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    localStorage.setItem("user", JSON.stringify(formData));
 
     navigate("/");
-    window.location.reload(); // щоб App.jsx побачив user
+    window.location.reload();
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        backgroundColor: "#f5f7fa",
-      }}
-    >
-      <div
-        style={{
-          padding: "40px",
-          background: "white",
-          borderRadius: "12px",
-          width: "320px",
-          textAlign: "center",
-          boxShadow: "0 5px 20px rgba(0,0,0,0.1)",
-        }}
-      >
-        <h2>Welcome to FinTrack</h2>
+    <div className="login-page">
+      <div className="login-card">
+        <h2>Create your FinTrack account</h2>
 
-        <input
-          type="text"
-          placeholder="Enter your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") handleLogin();
-          }}
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginTop: "20px",
-            borderRadius: "8px",
-            border: "1px solid #ccc",
-          }}
-        />
+        <p className="login-subtitle">
+          Enter your personal and banking information to continue.
+        </p>
 
-        <button
-          onClick={handleLogin}
-          style={{
-            marginTop: "20px",
-            padding: "10px",
-            width: "100%",
-            background: "#4CAF50",
-            color: "white",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer",
-            fontWeight: "bold",
-          }}
-        >
-          Continue
-        </button>
+        <div className="form-group">
+          <label>Name</label>
+          <input
+            name="name"
+            type="text"
+            value={formData.name}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Surname</label>
+          <input
+            name="surname"
+            type="text"
+            value={formData.surname}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Email address</label>
+          <input
+            name="email"
+            type="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Phone number</label>
+          <input
+            name="phone"
+            type="tel"
+            value={formData.phone}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Bank name</label>
+          <input
+            name="bankName"
+            type="text"
+            value={formData.bankName}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Password</label>
+          <input
+            name="password"
+            type="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </div>
+
+        <button onClick={handleRegister}>Register and continue</button>
       </div>
     </div>
   );

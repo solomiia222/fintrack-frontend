@@ -18,6 +18,7 @@ function Header() {
         <NavLink to="/transactions">Transactions</NavLink>
         <NavLink to="/budgets">Budgets</NavLink>
         <NavLink to="/insights">AI Insights</NavLink>
+        <NavLink to="/account">Account</NavLink>
 
         <button className="logout-button" onClick={handleLogout}>
           Logout

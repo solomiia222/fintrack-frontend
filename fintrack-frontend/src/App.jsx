@@ -6,6 +6,7 @@ import Transactions from "./pages/Transactions";
 import Budgets from "./pages/Budgets";
 import Insights from "./pages/Insights";
 import Login from "./pages/Login";
+import Account from "./pages/Account";
 
 function App() {
   const user = localStorage.getItem("user");
@@ -15,7 +16,7 @@ function App() {
       <div className="app">
         {user && <Header />}
 
-        <main className="main-content">
+        <main className={user ? "main-content" : ""}>
           <Routes>
             <Route
               path="/login"
@@ -40,6 +41,11 @@ function App() {
             <Route
               path="/insights"
               element={user ? <Insights /> : <Navigate to="/login" />}
+            />
+
+            <Route
+              path="/account"
+              element={user ? <Account /> : <Navigate to="/login" />}
             />
           </Routes>
         </main>
